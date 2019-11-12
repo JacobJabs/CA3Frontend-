@@ -45,8 +45,13 @@ class App extends Component {
     super(props);
     this.state = { loggedIn: false };
   }
-  logout = () => {}; //TODO
-  login = (user, pass) => {}; //TODO
+  logout = () => {
+    facade.logout();
+    this.setState({ loggedIn: false });
+  }; //TODO
+  login = (user, pass) => {
+    facade.login(user, pass).then(res => this.setState({ loggedIn: true }));
+  }; //TODO
   render() {
     return (
       <div>
