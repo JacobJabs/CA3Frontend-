@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import facade from "./apiFacade";
+
 class LogIn extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,8 @@ class LogIn extends Component {
   render() {
     return (
       <div>
-        <h2>Login</h2>
+        <h1>Welcome to group2's website</h1>
+        <h3>Login</h3>
         <form onSubmit={this.login} onChange={this.onChange}>
           <input placeholder="User Name" id="username" />
           <input placeholder="Password" id="password" />
@@ -28,7 +30,7 @@ class LogIn extends Component {
 class LoggedIn extends Component {
   constructor(props) {
     super(props);
-    this.state = { dataFromServer: "Fetching!!" };
+    this.state = { dataFromServer: "Fetching!" };
   }
   componentDidMount() {}
   render() {
