@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import facade from "./apiFacade";
 
 class LogIn extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class LogIn extends Component {
   render() {
     return (
       <div>
-        <h2>Login</h2>
+        <h1>Welcome to group2's website</h1>
+        <h3>Login</h3>
         <form onSubmit={this.login} onChange={this.onChange}>
           <input placeholder="User Name" id="username" />
           <input placeholder="Password" id="password" />
@@ -28,13 +30,17 @@ class LogIn extends Component {
 class LoggedIn extends Component {
   constructor(props) {
     super(props);
-    this.state = { dataFromServer: "Fetching!!" };
+    this.state = { dataFromServer: "Fetching!" };
   }
   componentDidMount() {}
   render() {
     return (
       <div>
         <h2>Data Received from server</h2>
+        <div>
+          <input type="text" placeholder="Search" />
+          <button> Search </button>
+        </div>
         <h3>{this.state.dataFromServer}</h3>
       </div>
     );
@@ -45,8 +51,13 @@ class App extends Component {
     super(props);
     this.state = { loggedIn: false };
   }
-  logout = () => {}; //TODO
-  login = (user, pass) => {}; //TODO
+  logout = () => {
+    facade.logout();
+    this.setState({ loggedIn: false });
+  }; //TODO
+  login = (user, pass) => {
+    facade.login(user, pass).then(res => this.setState({ loggedIn: true }));
+  }; //TODO
   render() {
     return (
       <div>
