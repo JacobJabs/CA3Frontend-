@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/ca3";
+const URL = "http://localhost:8080/securitystarter";
 function handleHttpErrors(res) {
   if (!res.ok) {
     return Promise.reject({ status: res.status, fullError: res.json() });
