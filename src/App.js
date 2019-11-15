@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import facade from "./apiFacade";
+import Navigation from "./components/Navigation";
 
 class LogIn extends Component {
   constructor(props) {
@@ -34,19 +35,19 @@ class LoggedIn extends Component {
     super(props);
     this.state = { dataFromServer: "Fetching!" };
   }
-
   componentDidMount() {
     facade.fetchData().then(res => this.setState({ dataFromServer: res.msg }));
   }
-
   render() {
     return (
       <div>
         <h2>Data Received from server</h2>
+
         <div>
           <input type="text" placeholder="Search" />
           <button onClick={this.ineed}> Search </button>
         </div>
+
         <h3>{this.state.dataFromServer}</h3>
       </div>
     );
@@ -78,6 +79,9 @@ class App extends Component {
           ) : (
             <div>
               <LoggedIn />
+              <Navigation>
+                <li></li>
+              </Navigation>
               <button onClick={this.logout}>Logout</button>
             </div>
           )}
