@@ -1,5 +1,4 @@
-import { localURL as URL } from "./settings.js";
-
+const URL = "http://localhost:8080/ca3";
 function handleHttpErrors(res) {
   if (!res.ok) {
     return Promise.reject({ status: res.status, fullError: res.json() });
@@ -8,37 +7,7 @@ function handleHttpErrors(res) {
 }
 
 class ApiFacade {
-  fetchData = () => {
-    const options = this.makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
-  };
-
-  setToken = token => {
-    localStorage.setItem("jwtToken", token);
-  };
-  getToken = () => {
-    return localStorage.getItem("jwtToken");
-  };
-  loggedIn = () => {
-    const loggedIn = this.getToken() != null;
-    return loggedIn;
-  };
-  logout = () => {
-    localStorage.removeItem("jwtToken");
-  };
-
-  login = (user, pass) => {
-    const options = this.makeOptions("POST", true, {
-      username: user,
-      password: pass
-    });
-    return fetch(URL + "/api/login", options)
-      .then(handleHttpErrors)
-      .then(res => {
-        this.setToken(res.token);
-      });
-  };
-
+  //Insert utility-methods from a latter step (d) here
   makeOptions(method, addToken, body) {
     var opts = {
       method: method,
@@ -55,6 +24,35 @@ class ApiFacade {
     }
     return opts;
   }
+
+  setToken = token => {
+    localStorage.setItem("jwtToken", token);
+  };
+  getToken = () => {
+    return localStorage.getItem("jwtToken");
+  };
+  loggedIn = () => {
+    const loggedIn = this.getToken() != null;
+    return loggedIn;
+  };
+  logout = () => {
+    localStorage.removeItem("jwtToken");
+  };
+  login = (user, pass) => {
+    const options = this.makeOptions("POST", true, {
+      username: user,
+      password: pass
+    });
+    return fetch(URL + "/api/login", options)
+      .then(handleHttpErrors)
+      .then(res => {
+        this.setToken(res.token);
+      });
+  };
+  fetchData = () => {
+    const options = this.makeOptions("GET", true); //True add's the token
+    return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
+  };
 }
 const facade = new ApiFacade();
 export default facade;
