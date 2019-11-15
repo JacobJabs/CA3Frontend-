@@ -6,6 +6,7 @@ class LogIn extends Component {
     super(props);
     this.state = { username: "", password: "" };
   }
+
   login = evt => {
     evt.preventDefault();
     this.props.login(this.state.username, this.state.password);
@@ -32,6 +33,7 @@ class LoggedIn extends Component {
     super(props);
     this.state = { dataFromServer: "Fetching!" };
   }
+
   componentDidMount() {}
   render() {
     return (
@@ -39,7 +41,7 @@ class LoggedIn extends Component {
         <h2>Data Received from server</h2>
         <div>
           <input type="text" placeholder="Search" />
-          <button> Search </button>
+          <button onClick=""> Search </button>
         </div>
         <h3>{this.state.dataFromServer}</h3>
       </div>
@@ -51,6 +53,10 @@ class App extends Component {
     super(props);
     this.state = { loggedIn: false };
   }
+  ineed = () => {
+    return fetch(URL + "/api/spells/index");
+  };
+
   logout = () => {
     facade.logout();
     this.setState({ loggedIn: false });
