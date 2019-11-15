@@ -53,6 +53,13 @@ class ApiFacade {
     const options = this.makeOptions("GET", true); //True add's the token
     return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
   };
+
+  fetchSpell = id => {
+    const options = this.makeOptions("GET", false);
+    return fetch(URL + "/api/info/AllSpells/" + id, options).then(
+      handleHttpErrors
+    );
+  };
 }
 const facade = new ApiFacade();
 export default facade;

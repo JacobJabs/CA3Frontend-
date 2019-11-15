@@ -28,16 +28,23 @@ class LogIn extends Component {
 }
 function LoggedIn() {
   const [data, setData] = useState({});
+  const [id, setId] = useState(1);
   useEffect(() => {
-    facade.fetchData().then(res => setData(res));
-  }, []);
+    facade.fetchSpell(id).then(res => setData(res));
+    //facade.fetchData().then(res => setData(res));
+  }, [id]);
+
+  function set_Id(evt) {
+    const id = document.getElementById("id").value;
+    setId(id);
+  }
 
   return (
     <div>
       <h2>Data Received from server</h2>
       <div>
-        <input type="text" placeholder="Search" />
-        <button> Search </button>
+        <input id="id" type="text" placeholder="Search" />
+        <button onClick={set_Id}> Search </button>
       </div>
       <h3>{JSON.stringify(data)}</h3>
     </div>
