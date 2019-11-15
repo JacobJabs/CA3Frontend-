@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import facade from "./apiFacade";
 
 class LogIn extends Component {
@@ -26,23 +26,24 @@ class LogIn extends Component {
     );
   }
 }
-class LoggedIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { dataFromServer: "Fetching!!" };
-  }
-  componentDidMount() {
-    facade.fetchData().then(res => this.setState({ dataFromServer: res.msg }));
-  }
-  render() {
-    return (
+function LoggedIn() {
+  const [data, setData] = useState({});
+  useEffect(() => {
+    facade.fetchData().then(res => setData(res));
+  }, []);
+
+  return (
+    <div>
+      <h2>Data Received from server</h2>
       <div>
-        <h2>Data Received from server</h2>
-        <h3>{this.state.dataFromServer}</h3>
+        <input type="text" placeholder="Search" />
+        <button> Search </button>
       </div>
-    );
-  }
+      <h3>{JSON.stringify(data)}</h3>
+    </div>
+  );
 }
+
 class App extends Component {
   constructor(props) {
     super(props);
