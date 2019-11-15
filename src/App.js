@@ -1,5 +1,13 @@
 import React, { Component, useEffect, useState } from "react";
 import facade from "./apiFacade";
+import Home from "./components/Home";
+import DND from "./components/DND";
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Switch
+} from "react-router-dom";
 
 class LogIn extends Component {
   constructor(props) {
@@ -26,6 +34,25 @@ class LogIn extends Component {
     );
   }
 }
+class LoggedIn extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { dataFromServer: "Fetching!!" };
+  }
+  componentDidMount() {
+    facade.fetchData().then(res => this.setState({ dataFromServer: res.msg }));
+  }
+  render() {
+    return (
+      <div>
+        <Header />
+
+        <Content />
+      </div>
+    );
+  }
+}
+/*
 function LoggedIn() {
   const [data, setData] = useState({});
   const [id, setId] = useState(1);
@@ -43,13 +70,16 @@ function LoggedIn() {
     <div>
       <h2>Data Received from server</h2>
       <div>
+        <Header />
         <input id="id" type="text" placeholder="Search" />
         <button onClick={set_Id}> Search </button>
       </div>
       <h3>{JSON.stringify(data)}</h3>
+      <Content />
     </div>
   );
 }
+*/
 
 class App extends Component {
   constructor(props) {
@@ -69,13 +99,47 @@ class App extends Component {
         {!this.state.loggedIn ? (
           <LogIn login={this.login} />
         ) : (
-          <div>
-            <LoggedIn />
-            <button onClick={this.logout}>Logout</button>
-          </div>
+          <Router>
+            <div>
+              <LoggedIn />
+              <button onClick={this.logout}>Logout</button>
+            </div>
+          </Router>
         )}
       </div>
     );
   }
 }
 export default App;
+
+const Header = () => {
+  return (
+    <ul className="header">
+      <li>
+        <NavLink exact activeClassName="active" to="/">
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName="active" to="/DND">
+          Dungeons and Dragon
+        </NavLink>
+      </li>
+    </ul>
+  );
+};
+
+const Content = () => {
+  return (
+    <Switch>
+      <Route exact path="/">
+        {" "}
+        <Home />{" "}
+      </Route>
+      <Route path="/DND">
+        {" "}
+        <DND />{" "}
+      </Route>
+    </Switch>
+  );
+};
