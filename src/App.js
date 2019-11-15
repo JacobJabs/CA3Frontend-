@@ -1,5 +1,13 @@
 import React, { Component } from "react";
 import facade from "./apiFacade";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 
 class LogIn extends Component {
   constructor(props) {
@@ -33,8 +41,14 @@ class LoggedIn extends Component {
     super(props);
     this.state = { dataFromServer: "Fetching!" };
   }
+<<<<<<< HEAD
 
   componentDidMount() {}
+=======
+  componentDidMount() {
+    facade.fetchData().then(res => this.setState({ dataFromServer: res.msg }));
+  }
+>>>>>>> c51d80b1841f5173068a017e51bc143553346ea9
   render() {
     return (
       <div>
@@ -48,6 +62,7 @@ class LoggedIn extends Component {
     );
   }
 }
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -66,16 +81,18 @@ class App extends Component {
   }; //TODO
   render() {
     return (
-      <div>
-        {!this.state.loggedIn ? (
-          <LogIn login={this.login} />
-        ) : (
-          <div>
-            <LoggedIn />
-            <button onClick={this.logout}>Logout</button>
-          </div>
-        )}
-      </div>
+      <Router>
+        <div>
+          {!this.state.loggedIn ? (
+            <LogIn login={this.login} />
+          ) : (
+            <div>
+              <LoggedIn />
+              <button onClick={this.logout}>Logout</button>
+            </div>
+          )}
+        </div>
+      </Router>
     );
   }
 }

@@ -1,4 +1,5 @@
-const URL = "http://localhost:8080/ca3";
+import { localURL as URL } from "./settings.js";
+
 function handleHttpErrors(res) {
   if (!res.ok) {
     return Promise.reject({ status: res.status, fullError: res.json() });
