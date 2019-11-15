@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-function Welcome() {
+const Welcome = () => {
   return (
-    <div className="container">
-      <Link to="/login">Login</Link>
+    <div>
+      <h1>Welcome to our site</h1>
     </div>
   );
-}
+};
 
 export default Welcome;

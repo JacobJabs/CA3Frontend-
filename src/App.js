@@ -8,6 +8,7 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
+import Navigation from "./components/Navigation";
 
 class LogIn extends Component {
   constructor(props) {
@@ -41,22 +42,13 @@ class LoggedIn extends Component {
     super(props);
     this.state = { dataFromServer: "Fetching!" };
   }
-<<<<<<< HEAD
-
-  componentDidMount() {}
-=======
   componentDidMount() {
     facade.fetchData().then(res => this.setState({ dataFromServer: res.msg }));
   }
->>>>>>> c51d80b1841f5173068a017e51bc143553346ea9
   render() {
     return (
       <div>
         <h2>Data Received from server</h2>
-        <div>
-          <input type="text" placeholder="Search" />
-          <button onClick=""> Search </button>
-        </div>
         <h3>{this.state.dataFromServer}</h3>
       </div>
     );
@@ -88,6 +80,9 @@ class App extends Component {
           ) : (
             <div>
               <LoggedIn />
+              <Navigation>
+                <li></li>
+              </Navigation>
               <button onClick={this.logout}>Logout</button>
             </div>
           )}
