@@ -45,7 +45,7 @@ class LoggedIn extends Component {
         <h2>Data Received from server</h2>
         <div>
           <input type="text" placeholder="Search" />
-          <button onClick=""> Search </button>
+          <button onClick={this.ineed}> Search </button>
         </div>
         <h3>{this.state.dataFromServer}</h3>
       </div>
