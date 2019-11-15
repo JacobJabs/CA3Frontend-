@@ -1,3 +1,5 @@
+import { DNDList } from "./settings";
+
 const URL = "http://localhost:8080/ca3";
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -56,9 +58,7 @@ class ApiFacade {
 
   fetchSpell = id => {
     const options = this.makeOptions("GET", false);
-    return fetch(URL + "/api/info/AllSpells/" + id, options).then(
-      handleHttpErrors
-    );
+    return fetch(URL + DNDList + id, options).then(handleHttpErrors);
   };
 }
 const facade = new ApiFacade();
