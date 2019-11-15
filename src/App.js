@@ -1,13 +1,6 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import facade from "./apiFacade";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  useRouteMatch,
-  useParams
-} from "react-router-dom";
 
 class LogIn extends Component {
   constructor(props) {
@@ -41,14 +34,11 @@ class LoggedIn extends Component {
     super(props);
     this.state = { dataFromServer: "Fetching!" };
   }
-<<<<<<< HEAD
 
-  componentDidMount() {}
-=======
   componentDidMount() {
     facade.fetchData().then(res => this.setState({ dataFromServer: res.msg }));
   }
->>>>>>> c51d80b1841f5173068a017e51bc143553346ea9
+
   render() {
     return (
       <div>
