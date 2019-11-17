@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { DNDList } from "../settings";
+import React, { useEffect, useState } from "react";
 import JSONPretty from "react-json-pretty";
 import facade from "../apiFacade";
-
 /*
 const DND = () => {
   const [hasError, setErrors] = useState(false);
@@ -32,28 +30,29 @@ const DND = () => {
 };
 export default DND;
 */
+
 export default function LoggedIn() {
   const [data, setData] = useState({});
-  const [id, setId] = useState(1);
+  const [id, setId] = useState("");
+
   useEffect(() => {
     facade.fetchSpell(id).then(res => setData(res));
     //facade.fetchData().then(res => setData(res));
   }, [id]);
 
-  function set_Id(evt) {
-    const id = document.getElementById("id").value;
-    setId(id);
-  }
-
   return (
     <div>
       <h2>Data Received from server</h2>
       <div>
-        <input id="id" type="text" placeholder="Search" />
-        <button onClick={set_Id}> Search </button>
+        <input
+          id="id"
+          onChange={event => setId(event.target.value)}
+          type="text"
+          placeholder="Search"
+          value={id}
+        />
       </div>
-      <h4></h4>
-      <JSONPretty id="json-pretty" data={data}></JSONPretty>
+      {id !== "" && <JSONPretty id="json-pretty" data={data}></JSONPretty>}
     </div>
   );
 }

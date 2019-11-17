@@ -1,13 +1,13 @@
-import React, { Component, useEffect, useState } from "react";
-import facade from "./apiFacade";
-import Home from "./components/Home";
-import DND from "./components/DND";
+import React, { Component } from "react";
 import {
   BrowserRouter as Router,
-  Route,
   NavLink,
+  Route,
   Switch
 } from "react-router-dom";
+import facade from "./apiFacade";
+import DND from "./components/DND";
+import Home from "./components/Home";
 
 class LogIn extends Component {
   constructor(props) {
